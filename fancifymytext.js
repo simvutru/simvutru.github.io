@@ -19,8 +19,17 @@ function styleChanges() {
     }
 }
 function mooText() {
-   const textArea = document.getElementById("textBox");
-   let text = textArea.value.toUpperCase();
-   text = text.replace(/\b(\w+)(?=\.)/g, "$1-MOO");
-   textArea.value = text;
+  var textArea = document.getElementById("textBox");
+  var text = textArea.value.toUpperCase();
+  var sentences = text.split(".");
+  for (var i = 0; i < sentences.length - 1; i++) { // last element may be empty if text ends with "."
+      var words = sentences[i].trim().split(" ");
+      if (words.length > 0) {
+          words[words.length - 1] += "-MOO";
+      }
+      sentences[i] = words.join(" ");
+  }
+
+  text = sentences.join(". ");
+  textArea.value = text;
 }
